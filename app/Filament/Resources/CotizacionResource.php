@@ -69,6 +69,11 @@ class CotizacionResource extends Resource
                     ->sortable()
 
                 ,
+                TextColumn::make('imagenes_count')
+                    ->label('Imgs')
+                    ->counts('imagenes')
+                    ->badge()
+                    ->sortable(),
                 TextColumn::make('observaciones')->searchable(),
                 TextColumn::make('estado')->badge(),
                 TextColumn::make('created_at')->dateTime('Y-m-d H:i')->sortable(),
@@ -84,6 +89,29 @@ class CotizacionResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+
+                Tables\Actions\Action::make('en_proceso')
+                    ->label('En proceso')
+                    ->icon('heroicon-o-arrow-path')
+                    ->visible(fn($record) => $record->estado === 'nueva')
+                    ->color('warning')
+                    ->action(fn($record) => $record->update(['estado' => 'en_proceso']))
+                    ->requiresConfirmation(),
+
+                Tables\Actions\Action::make('confirmar')
+                    ->icon('heroicon-o-check-circle')
+                    ->visible(fn($record) => $record->estado !== 'cerrada')
+                    ->color('success')
+                    ->action(fn($record) => $record->update(['estado' => 'confirmada']))
+                    ->requiresConfirmation(),
+
+                Tables\Actions\Action::make('cerrar')
+                    ->label('Cerrar')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->visible(fn($record) => $record->estado !== 'cerrada')
+                    ->action(fn($record) => $record->update(['estado' => 'cerrada']))
+                    ->requiresConfirmation(),
             ]);
     }
 
