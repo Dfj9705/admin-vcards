@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->domain(getenv('APP_URL'))
+            ->favicon(asset('v_logo.jpeg'))
             ->path('/')
             ->login()
             ->colors([
