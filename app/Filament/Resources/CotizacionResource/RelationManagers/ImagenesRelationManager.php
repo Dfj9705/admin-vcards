@@ -23,13 +23,23 @@ class ImagenesRelationManager extends RelationManager
                     ->getStateUsing(fn($record) => $record->public_url)
                     ->square()
                     ->openUrlInNewTab(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d H:i'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha')
+                    ->dateTime('Y-m-d H:i')
+                    ->sortable(),
             ])
             ->headerActions([
-                // Opcional: permitir agregar manualmente desde admin (si quieres)
-                // Tables\Actions\CreateAction::make(),
+                // Si NO quieres subir desde admin, déjalo vacío
             ])
             ->actions([
+                Tables\Actions\Action::make('ver')
+                    ->label('Ver')
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->url(fn($record) => $record->public_url)
+                    ->openUrlInNewTab(),
+
+                // Opcional: borrar registro (no borra archivo físico)
                 Tables\Actions\DeleteAction::make(),
             ]);
     }
