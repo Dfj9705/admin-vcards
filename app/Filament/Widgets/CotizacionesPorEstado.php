@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 class CotizacionesPorEstado extends ChartWidget
 {
     protected static ?string $heading = 'Cotizaciones por estado';
-    protected int|string|array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 12;
     protected function getData(): array
     {
         $nueva = Cotizacion::where('estado', 'nueva')->count();
