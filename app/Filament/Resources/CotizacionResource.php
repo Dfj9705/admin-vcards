@@ -63,7 +63,13 @@ class CotizacionResource extends Resource
                 TextColumn::make('fecha')->searchable(),
                 TextColumn::make('telefono')->searchable(),
                 TextColumn::make('email')->searchable(),
-                TextColumn::make('servicio')->relationship('tipoServicio', 'nombre')->searchable(),
+                TextColumn::make('tipoServicio.nombre')
+                    ->label('Servicio')
+                    ->searchable()
+                    ->sortable()
+
+                ,
+                TextColumn::make('observaciones')->searchable(),
                 TextColumn::make('estado')->badge(),
                 TextColumn::make('created_at')->dateTime('Y-m-d H:i')->sortable(),
             ])

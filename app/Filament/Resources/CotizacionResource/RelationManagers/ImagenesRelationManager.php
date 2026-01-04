@@ -20,8 +20,9 @@ class ImagenesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\ImageColumn::make('path')
                     ->label('Imagen')
-                    ->getStateUsing(fn($record) => $record->url) // usa accessor
-                    ->square(),
+                    ->getStateUsing(fn($record) => $record->public_url)
+                    ->square()
+                    ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d H:i'),
             ])
             ->headerActions([

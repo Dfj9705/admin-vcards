@@ -10,7 +10,7 @@ class ImageCotizacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'image_cotizaciones';
+    protected $table = 'cotizacion_imagenes';
 
     protected $fillable = [
         'cotizacion_id',
@@ -20,5 +20,12 @@ class ImageCotizacion extends Model
     public function cotizacion(): BelongsTo
     {
         return $this->belongsTo(Cotizacion::class, 'cotizacion_id');
+    }
+    public function getPublicUrlAttribute(): string
+    {
+        $base = rtrim(config('app.public_uploads_url'), '/');
+        $path = ltrim((string) $this->path, '/');
+
+        return $base . '/' . $path;
     }
 }

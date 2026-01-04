@@ -17,6 +17,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'public_uploads_url' => env('PUBLIC_UPLOADS_URL'),
+
 
     /*
     |--------------------------------------------------------------------------
