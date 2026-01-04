@@ -8,11 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class CotizacionesStats extends BaseWidget
 {
-
-    protected function getColumns(): int
-    {
-        return 5;
-    }
+    protected int|string|array $columnSpan = '5';
     protected function getStats(): array
     {
         return [
