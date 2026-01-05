@@ -100,7 +100,7 @@ class CotizacionResource extends Resource
 
                 Tables\Actions\Action::make('confirmar')
                     ->icon('heroicon-o-check-circle')
-                    ->visible(fn($record) => $record->estado !== 'cerrada')
+                    ->visible(fn($record) => $record->estado !== 'confirmada')
                     ->color('success')
                     ->action(fn($record) => $record->update(['estado' => 'confirmada']))
                     ->requiresConfirmation(),
